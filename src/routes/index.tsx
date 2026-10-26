@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Widget chat laterale per la salute ginecologica, demo UI.",
+          "Widget chat laterale dedicato alle domande e agli approfondimenti di ginecologia.",
       },
       {
         property: "og:type",
