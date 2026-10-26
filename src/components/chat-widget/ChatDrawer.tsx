@@ -107,7 +107,7 @@ export function ChatDrawer({
             Assistente
           </h2>
           <p className="text-sm text-muted-foreground">
-            Fai una domanda sulla salute ginecologica
+            Fai le tue domande sulla ginecologia
           </p>
         </div>
 
