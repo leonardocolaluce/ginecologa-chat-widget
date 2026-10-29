@@ -3,8 +3,9 @@ import { useState } from "react";
 
 import { ChatDrawer } from "./ChatDrawer";
 import { FloatingChatButton } from "./FloatingChatButton";
+import type { WidgetMode } from "@/lib/chat-api";
 
-export type WidgetMode = "patient" | "menopause";
+export type { WidgetMode };
 
 export interface ChatWidgetProps {
   defaultOpen?: boolean;
@@ -45,6 +46,8 @@ export function ChatWidget({
       )}
 
       <ChatDrawer
+        key={mode}
+        mode={mode}
         open={open}
         onClose={() => setOpen(false)}
         onOpenFullChat={openFullChat}
