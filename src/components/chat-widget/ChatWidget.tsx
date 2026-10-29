@@ -1,22 +1,53 @@
+
 import { useState } from "react";
+
 import { ChatDrawer } from "./ChatDrawer";
 import { FloatingChatButton } from "./FloatingChatButton";
 
+export type WidgetMode = "patient" | "menopause";
+
 export interface ChatWidgetProps {
   defaultOpen?: boolean;
+  mode?: WidgetMode;
   onOpenFullChat?: () => void;
 }
 
-/** Drop-in widget: floating button + right-side assistant panel. Demo UI only. */
-export function ChatWidget({ defaultOpen = false, onOpenFullChat }: ChatWidgetProps) {
+const FULL_CHAT_URLS: Record<WidgetMode, string> = {
+  patient:
+    "https://urchin-app-l7pdb.ondigitalocean.app",
+  menopause:
+    "https://hammerhead-app-fjpxn.ondigitalocean.app",
+};
+
+export function ChatWidget({
+  defaultOpen = false,
+  mode = "patient",
+  onOpenFullChat,
+}: ChatWidgetProps) {
   const [open, setOpen] = useState(defaultOpen);
+
+  function openFullChat() {
+    if (onOpenFullChat) {
+      onOpenFullChat();
+      return;
+    }
+
+    window.location.assign(FULL_CHAT_URLS[mode]);
+  }
+
   return (
     <>
-      {!open && <FloatingChatButton open={open} onClick={() => setOpen(true)} />}
+      {!open && (
+        <FloatingChatButton
+          open={open}
+          onClick={() => setOpen(true)}
+        />
+      )}
+
       <ChatDrawer
         open={open}
         onClose={() => setOpen(false)}
-        onOpenFullChat={onOpenFullChat ?? (() => console.log("onOpenFullChat"))}
+        onOpenFullChat={openFullChat}
       />
     </>
   );
